@@ -18,7 +18,7 @@ class Spouse < DatabaseTemplate
   def save
     results = DB.exec("INSERT INTO #{@table_name} (partner1_id) VALUES ('#{@partner1_id}') RETURNING id;")
     @id = results.first['id']
-    @values['id'] = @id  
+    @values['id'] = @id
     @values.each do |key, value|
       unless value.nil? || value == ""
         DB.exec("UPDATE #{@table_name} SET #{key} = '#{value}' WHERE id = #{@id};")

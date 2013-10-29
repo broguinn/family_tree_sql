@@ -1,7 +1,7 @@
 class DatabaseTemplate
   attr_reader :name, :id, :values, :table_name
 
-  def initialize(values) 
+  def initialize(values)
     @name = values['name']
     @id = values['id']
     @values = { 'name' => @name, 'id' => @id }
@@ -14,7 +14,7 @@ class DatabaseTemplate
   def save
     results = DB.exec("INSERT INTO #{@table_name} (name) VALUES ('#{@name}') RETURNING id;")
     @id = results.first['id']
-    @values['id'] = @id  
+    @values['id'] = @id
     @values.each do |key, value|
       unless value.nil? || value == ""
         DB.exec("UPDATE #{@table_name} SET #{key} = '#{value}' WHERE id = #{@id};")
