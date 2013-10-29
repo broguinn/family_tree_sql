@@ -6,7 +6,6 @@ require './lib/spouse'
 require './lib/parent'
 require './lib/sibling'
 
-
 DB = PG.connect( :dbname => 'family_tree')
 
 def init
@@ -48,7 +47,7 @@ def person_menu(person)
   puts "Name: #{person.name}"
   puts ""
   puts "Spouses: "
-  person.spouses.each do |spouse| 
+  person.spouses.each do |spouse|
     print "  #{spouse.name}"
     puts " (#{person.relationship(spouse)})"
   end
@@ -140,7 +139,7 @@ def add_spouse(person)
   puts "Select a new spouse with their index, or person [m]enu"
   selection = gets.chomp.downcase.strip
   if selection.to_i > 0 && selection.to_i <= Person.all.length
-    puts "Enter the realtionship status:"
+    puts "Enter the relationship status:"
     status = gets.chomp
     spouse_id = Person.all[selection.to_i - 1].id
     spouse = Spouse.new({ 'partner1_id' => person.id, 'partner2_id' => spouse_id, 'status' => status})
@@ -235,7 +234,7 @@ end
 
 def remove_child(person)
   print `clear`
-  puts "Children: " 
+  puts "Children: "
   person.children.each_with_index do |child, id|
     puts " #{id + 1}. #{child.name}"
   end
@@ -271,7 +270,6 @@ def remove_parent(person)
   end
 end
 
-
 def remove_sibling(person)
   print `clear`
   puts "Siblings: "
@@ -292,7 +290,3 @@ def remove_sibling(person)
 end
 
 init
-
-
-
-

@@ -1,5 +1,5 @@
 class Sibling < DatabaseTemplate
-    attr_reader :id, :values, :sibling1_id, :sibling2_id
+  attr_reader :id, :values, :sibling1_id, :sibling2_id
 
   def initialize(values)
     @id = values['id']
